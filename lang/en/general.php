@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'message'                                                               => 'Message',
+    'dashboard'                                                             => 'Dashboard',
+    'nothing_found'                                                         => 'Nothing Found',
+    'arabic'                                                                => 'Arabic',
+    'english'                                                               => 'English',
+    'search_in_menu'                                                        => 'Search in menu',
+    'status'                                                                => "Status",
+    'actions'                                                               => "Actions",
+    'updated_successfully'                                                  => "Updated Successfully",
+    'error_in_update'                                                       => "Error In Update",
+    'update'                                                                => 'Update',
+    'save'                                                                  => 'Save',
+    'edit'                                                                  => 'Edit',
+    'view'                                                                  => 'Show',
+    'delete'                                                                => 'Delete',
+    'delete_confirmation'                                                   => 'Delete Confirmation',
+    'are_you_sure_to_delete_this'                                           => 'Are you sure to delete this?',
+    'cancel'                                                                => 'Cancel',
+    'name_required'                                                         => 'Name Required',
+    'username_required'                                                     => 'User Name Required',
+    'name_name_must_be_unique'                                              => 'User Name Must Be Unique',
+    'password_required'                                                     => 'Password Required',
+    'username_is_already_token'                                             => 'User Name Is Already Token',  
+    'deleted_successfully'                                                  => 'Deleted Successfully',  
+];
