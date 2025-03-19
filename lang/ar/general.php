@@ -26,7 +26,10 @@ return [
     'password_required'                                                     => 'كلمة المرور مطلوبة',
     'username_is_already_token'                                             => 'اسم المستخدم مأخوذ بالفعل',
     'deleted_successfully'                                                  => 'تم الحذف بنجاح',
-    
-    ];
+    'added_successfully'                                                    => 'تم الاضافة بنجاح',
+    'type_enter'                                                            => 'اكتب و اضغط enter',
+
+
+];
     
     

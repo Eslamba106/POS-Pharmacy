@@ -34,6 +34,20 @@ class SectionsTableSeeder extends Seeder
         Section::updateOrCreate(['id' => 14], ['name' => 'edit_user', 'section_group_id' => 9, 'caption' => 'edit_user']);
         Section::updateOrCreate(['id' => 15], ['name' => 'create_user', 'section_group_id' => 9, 'caption' => 'create_user']);
  
+        // Categories 16 - 20
+        Section::updateOrCreate(['id' => 16], ['name' => 'categories', 'caption' => 'categories']);
+        Section::updateOrCreate(['id' => 17], ['name' => 'all_categories', 'section_group_id' => 16, 'caption' => 'show_all_categories']); 
+        Section::updateOrCreate(['id' => 18], ['name' => 'delete_category', 'section_group_id' => 16, 'caption' => 'delete_category']);
+        Section::updateOrCreate(['id' => 19], ['name' => 'edit_category', 'section_group_id' => 16, 'caption' => 'edit_category']);
+        Section::updateOrCreate(['id' => 20], ['name' => 'create_category', 'section_group_id' => 16, 'caption' => 'create_category']);
+ 
+        // Users Management 21 - 25
+        Section::updateOrCreate(['id' => 21], ['name' => 'departments', 'caption' => 'departments']);
+        Section::updateOrCreate(['id' => 22], ['name' => 'all_departments', 'section_group_id' => 21, 'caption' => 'show_all_departments']); 
+        Section::updateOrCreate(['id' => 23], ['name' => 'delete_department', 'section_group_id' => 21, 'caption' => 'delete_department']);
+        Section::updateOrCreate(['id' => 24], ['name' => 'edit_department', 'section_group_id' => 21, 'caption' => 'edit_department']);
+        Section::updateOrCreate(['id' => 25], ['name' => 'create_department', 'section_group_id' => 21, 'caption' => 'create_department']);
+ 
         /* Run Panel Sections */
         $this->runPanelSections();
     }

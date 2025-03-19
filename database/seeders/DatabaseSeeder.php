@@ -13,16 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call(RolesTableSeeder::class);
-        // $this->call(SectionsTableSeeder::class);
-        // $this->call(PermissionsTableSeeder::class);
-        \App\Models\Staff::factory()->create([
-            'name' => 'new',
-            'email' => 'new@example.com', 
-            'user_name' => 'new',
-            'password' => Hash::make('12345'),
-            'role_id'=> 1,
-            'role_name'=> 'admin',
-        ]);
+        $this->call(RolesTableSeeder::class);
+        $this->call(SectionsTableSeeder::class);
+        $this->call(PermissionsTableSeeder::class);
+        // \App\Models\Staff::factory()->create([
+        //     'name' => 'new',
+        //     'email' => 'new@example.com', 
+        //     'user_name' => 'new',
+        //     'password' => Hash::make('12345'),
+        //     'role_id'=> 1,
+        //     'role_name'=> 'admin',
+        // ]);
     }
 }

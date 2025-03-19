@@ -20,6 +20,7 @@ dir="ltr" lang="en" @endif>
 
     <!-- google font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- aiz core css -->
     <link rel="stylesheet" href="{{ asset(main_path() . 'css/vendors.css') }}">
@@ -40,7 +41,7 @@ dir="ltr" lang="en" @endif>
         var AIZ = AIZ || {};
         AIZ.local = {
             nothing_selected: '{!! __('Nothing selected') !!}',
-            nothing_found: '{!! __('Nothing found') !!}',
+            nothing_found: '{!! __('general.nothing_found') !!}',
             choose_file: '{{ __('Choose file') }}',
             file_selected: '{{ __('File selected') }}',
             files_selected: '{{ __('Files selected') }}',
