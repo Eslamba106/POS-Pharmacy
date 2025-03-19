@@ -182,6 +182,22 @@ if (! function_exists('get_settings')) {
         return $config;
     }
 }
+
+if (! function_exists('bulk_delete')) {
+    function bulk_delete($request, $model)
+    {
+        if ($request->id) {
+            foreach ($request->id as $item_id) {
+                $record = $model::find($item_id);  
+                if ($record) {
+                    $record->delete();  
+                }
+            }
+            return 1;
+        } 
+        return 0;
+    }
+}
 if (! function_exists('main_path')) {
     function main_path()
     {

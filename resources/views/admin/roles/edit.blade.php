@@ -1,25 +1,22 @@
-@extends('layouts.back-end.app')
+@extends('layouts.main')
 
 
 @section('title')
-    {{ __('roles.roles') }}
+    {{ __('roles.edit_role') }}
 @endsection
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="{{ asset('public/assets/back-end') }}/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset(main_path() .'css/select2.min.css') }}" rel="stylesheet" />
 @endpush
-
-@section('page_name')
-    {{ __('roles.all_roles') }}
-@endsection
+ 
 @section('content')
 
     <div class="content container-fluid">
         <!-- Page Title -->
         <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
             <h2 class="h1 mb-0 d-flex align-items-center gap-2">
-                <img width="20" src="{{ asset('/public/assets/back-end/img/brand.png') }}" alt="">
-                {{ __('roles.create_role') }}
+               
+                {{ __('roles.edit_role') }}
             </h2>
         </div>
         <!-- End Page Title -->
@@ -43,8 +40,7 @@
 
                             <div class="row">
                                 <div class="col-12 col-md-6 col-lg-6">
-
-                                    @if (empty($role))
+ 
                                         <div class="form-group @error('name') is-invalid @enderror">
                                             <label>{{ trans('roles.name') }}</label>
                                             <input type="text" name="name" class="form-control"
@@ -53,13 +49,12 @@
 
                                         @error('name')
                                             <div class="invalid-feedback">
-                                                {{ $message }}
+                                                {{ $error }}
                                             </div>
-                                        @enderror
-                                    @endif
+                                        @enderror 
 
                                     <div class="form-group @error('caption') is-invalid @enderror">
-                                        <label>{{ trans('roles.Caption') }}</label>
+                                        <label>{{ trans('roles.caption') }}</label>
                                         <input type="text" name="caption" class="form-control"
                                             value="{{ !empty($role) ? $role->caption : old('caption') }}" placeholder="" />
 
@@ -78,7 +73,7 @@
 
                             <div class="form-group" id="sections">
 
-                                @can('Create_Admin_Roles')
+                                @can('edit_admin_roles')
                                     <div class="mt-3"></div>
                                     <div class="row">
                                         @foreach ($sections as $section)
@@ -132,7 +127,7 @@
 
                             <div class="d-flex gap-3 justify-content-end">
 
-                                <button type="submit" class="btn btn--primary px-4">{{ __('general.update') }}</button>
+                                <button type="submit" class="btn btn-primary px-4">{{ __('general.update') }}</button>
                             </div>
                         </form>
                     </div>

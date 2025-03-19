@@ -25,4 +25,6 @@ return [
     'password_required'                                                     => 'Password Required',
     'username_is_already_token'                                             => 'User Name Is Already Token',  
     'deleted_successfully'                                                  => 'Deleted Successfully',  
+    'added_successfully'                                                    => 'Created Successfully',
+    'type_enter'                                                            => 'Type & Enter',
 ];

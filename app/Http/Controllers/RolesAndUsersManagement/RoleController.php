@@ -46,7 +46,7 @@ class RoleController extends Controller
 
     public function create()
     {
-        $this->authorize('Create_Admin_Roles');
+        $this->authorize('create_admin_roles');
         $roles = Role::with('users')
             ->orderBy('created_at', 'asc')
             ->paginate(10);
@@ -65,7 +65,7 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('Create_Admin_Roles');
+        $this->authorize('create_admin_roles');
 
         $request->validate(  [
             'name' => 'required|min:3|max:64|unique:roles,name',
@@ -87,12 +87,12 @@ class RoleController extends Controller
 
         Cache::forget('sections');
 
-        return redirect()->route('roles')->with('success' , "Created Successfully");
+        return redirect()->route('roles')->with('success' , __('general.added_successfully'));
     }
 
     public function edit($id)
     {
-        $this->authorize('Edit_Admin_Roles');
+        $this->authorize('edit_admin_roles');
 
         $role = Role::find($id);
         $permissions = Permission::where('role_id', '=', $role->id)->get();
@@ -111,7 +111,7 @@ class RoleController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->authorize('Update_Admin_Roles');
+        $this->authorize('update_admin_roles');
 
         $role = Role::find($id);
 
@@ -130,12 +130,12 @@ class RoleController extends Controller
 
         Cache::forget('sections');
 
-        return redirect()->route('roles')->with('success' , "Updated Successfully");
+        return redirect()->route('roles')->with('success' , __('general.updated_successfully'));
     }
 
     public function destroy(Request $request)
     {
-        $this->authorize('Delete_Admin_Roles');
+        $this->authorize('delete_admin_roles');
 
         $role = Role::find($request->id);
         if ($role->id !== 2) {
@@ -157,5 +157,10 @@ class RoleController extends Controller
             ];
         }
         Permission::insert($permissions);
+    }
+
+    public function bulk_role_delete(Request $request){
+        $items = bulk_delete($request ,'App\Models\Role' );
+        return $items;
     }
 }

@@ -4,7 +4,7 @@
     {{ __('general.dashboard') }}
 @endsection
 @section('content')
-    @if (auth()->guard('staffs')->user()->can('smtp_settings') &&
+    @if (auth()->user()->can('smtp_settings') &&
             env('MAIL_USERNAME') == null &&
             env('MAIL_PASSWORD') == null)
         <div class="">
@@ -15,9 +15,8 @@
         </div>
     @endif
     {{-- {{ dd(auth()->guard('staffs')->user()->hasPermission('admin_dashboard')) }} --}}
-    {{ dd(auth()->guard('staffs')->user()->getPermissions()) }}
-
-    @if (auth()->guard('staffs')->user()->can('admin_dashboard'))
+ 
+    @if (auth()->user()->can('admin_dashboard'))
         <div class="row gutters-10">
             <div class="col-lg-6">
                 <div class="row gutters-10">

@@ -16,7 +16,7 @@ class UserManagementController extends Controller
     use AuthorizesRequests;
     public function index(Request $request){
 
-        // $this->authorize('user_management');
+        $this->authorize('user_management');
         $search      = $request['search'];
         $query_param = $search ? ['search' => $request['search']] : '';
 
@@ -74,22 +74,27 @@ class UserManagementController extends Controller
     }
 
     public function view($id){
+        $this->authorize('edit_user');
         $roles = Role::all();
         $user = User::findOrFail($id);
         return view("admin.users.show", compact("user" , 'roles'));
     }
 
     public function edit($id){
+        $this->authorize('edit_user');
         $roles = Role::all();
         $user = User::findOrFail($id);
         return view("admin.users.show", compact("user" , 'roles'));
     }
 
     public function create(){
+        $this->authorize('create_user');
+
         $roles = Role::all();
         return view("admin.users.create" , compact("roles"));
     }
     public function store(Request $request){
+        $this->authorize('create_user');
         $request->validate([
             'name'              => "required",
             'user_name'         => "required|unique:users",
@@ -113,6 +118,7 @@ class UserManagementController extends Controller
 
     }
     public function update(Request $request , $id){
+        $this->authorize('edit_user');
         $user = User::findOrFail($id);
         $role = Role::where("id", $request->role)->first();
         $validatedData = $request->validate([
@@ -143,6 +149,8 @@ class UserManagementController extends Controller
     }
 
     public function destroy($id){
+        $this->authorize('delete_user');
+
         $user = User::findOrFail($id);
         $user->delete();
         return redirect()->route("user_management")->with("success", __('general.deleted_successfully') );
@@ -150,10 +158,18 @@ class UserManagementController extends Controller
 
     public function update_status(Request $request)
     {
+        $this->authorize('change_users_status');
+
         $user = User::findOrFail($request->id);
         $user->status = $request->status;
         $user->save();
         // Cache::forget('todays_deal_products');
         return  1;
+    }
+    public function bulk_user_delete(Request $request){
+        $this->authorize('delete_user');
+
+        $items = bulk_delete($request ,'App\Models\User' );
+        return $items;
     }
 }
