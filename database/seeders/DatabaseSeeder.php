@@ -15,10 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(RolesTableSeeder::class);
-        $this->call(SectionsTableSeeder::class);
+        // $this->call(RolesTableSeeder::class);
+        // $this->call(SectionsTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
-        $this->call(BranchSeeder::class);
         // \App\Models\Staff::factory()->create([
         //     'name' => 'new',
         //     'email' => 'new@example.com', 

@@ -1,3 +1,16 @@
+ @php
+     $url = url()->current();
+     $url_array = explode('/' , $url);
+     if(in_array('admin' , $url_array)){
+        $route = 'admin';
+     }
+     else if(in_array('staff' , $url_array)){
+        $route = 'staff';
+     }
+     else{
+        $route = 'web';
+     }
+ @endphp
  <div class="aiz-sidebar-wrap">
      <div class="aiz-sidebar left c-scrollbar">
          <div class="aiz-side-nav-logo-wrap">
@@ -22,7 +35,7 @@
 
                  @can('admin_dashboard')
                      <li class="aiz-side-nav-item">
-                         <a href="{{ route('dashboard') }}" class="aiz-side-nav-link">
+                         <a href="{{ route($route.'.dashboard') }}" class="aiz-side-nav-link">
                              <i class="las la-home aiz-side-nav-icon" style="font-size: 20px"></i>
                              <span class="aiz-side-nav-text" style="font-size: 20px">{{ __('general.dashboard') }}</span>
                          </a>
@@ -40,7 +53,7 @@
                          <ul class="aiz-side-nav-list level-2">
                              @can('all_departments')
                                  <li class="aiz-side-nav-item">
-                                     <a class="aiz-side-nav-link" href="{{ route('departments') }}">
+                                     <a class="aiz-side-nav-link" href="{{ route($route.'.departments') }}">
                                          <span class="aiz-side-nav-text"
                                              style="font-size: 16px">{{ __('roles.all_departments') }}</span>
                                      </a>
@@ -48,7 +61,7 @@
                              @endcan
                              @can('create_department')
                                  <li class="aiz-side-nav-item">
-                                     <a class="aiz-side-nav-link" href="{{ route('departments.create') }}">
+                                     <a class="aiz-side-nav-link" href="{{ route($route.'.departments.create') }}">
                                          <span class="aiz-side-nav-text"
                                              style="font-size: 16px">{{ __('roles.create_department') }}</span>
                                      </a>
@@ -68,7 +81,7 @@
                          <ul class="aiz-side-nav-list level-2">
                              @can('all_categories')
                                  <li class="aiz-side-nav-item">
-                                     <a class="aiz-side-nav-link" href="{{ route('categories') }}">
+                                     <a class="aiz-side-nav-link" href="{{ route($route.'.categories') }}">
                                          <span class="aiz-side-nav-text"
                                              style="font-size: 16px">{{ __('roles.all_categories') }}</span>
                                      </a>
@@ -76,7 +89,7 @@
                              @endcan
                              @can('create_department')
                                  <li class="aiz-side-nav-item">
-                                     <a class="aiz-side-nav-link" href="{{ route('categories.create') }}">
+                                     <a class="aiz-side-nav-link" href="{{ route($route.'.categories.create') }}">
                                          <span class="aiz-side-nav-text"
                                              style="font-size: 16px">{{ __('roles.create_category') }}</span>
                                      </a>
@@ -97,7 +110,7 @@
                      <ul class="aiz-side-nav-list level-2">
                          @can('all_users')
                              <li class="aiz-side-nav-item">
-                                 <a class="aiz-side-nav-link" href="{{ route('user_management') }}">
+                                 <a class="aiz-side-nav-link" href="{{ route($route.'.user_management') }}">
                                      <span class="aiz-side-nav-text"
                                          style="font-size: 16px">{{ __('roles.all_users') }}</span>
                                  </a>
@@ -105,7 +118,7 @@
                          @endcan
                          @can('create_user')
                              <li class="aiz-side-nav-item">
-                                 <a class="aiz-side-nav-link" href="{{ route('user_management.create') }}">
+                                 <a class="aiz-side-nav-link" href="{{ route($route.'.user_management.create') }}">
                                      <span class="aiz-side-nav-text"
                                          style="font-size: 16px">{{ __('roles.create_user') }}</span>
                                  </a>
@@ -125,7 +138,7 @@
                          <ul class="aiz-side-nav-list level-2">
                              @can('show_admin_roles')
                                  <li class="aiz-side-nav-item">
-                                     <a class="aiz-side-nav-link" href="{{ route('roles') }}">
+                                     <a class="aiz-side-nav-link" href="{{ route($route.'.roles') }}">
                                          <span class="aiz-side-nav-text"
                                              style="font-size: 16px">{{ __('roles.all_roles') }}</span>
                                      </a>
@@ -133,7 +146,7 @@
                              @endcan
                              @can('create_admin_roles')
                                  <li class="aiz-side-nav-item">
-                                     <a class="aiz-side-nav-link" href="{{ route('roles.create') }}">
+                                     <a class="aiz-side-nav-link" href="{{ route($route.'.roles.create') }}">
                                          <span class="aiz-side-nav-text"
                                              style="font-size: 16px">{{ __('roles.create_role') }}</span>
                                      </a>
