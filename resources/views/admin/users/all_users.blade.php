@@ -1,6 +1,19 @@
 @extends('layouts.main')
 @push('css_or_js')
 @endpush
+@php
+$url = url()->current();
+$url_array = explode('/' , $url);
+if(in_array('admin' , $url_array)){
+   $route = 'admin';
+}
+else if(in_array('staff' , $url_array)){
+   $route = 'staff';
+}
+else{
+   $route = 'web';
+}
+@endphp
 @section('title')
     {{ __('roles.all_users') }}
 @endsection
@@ -12,7 +25,7 @@
             </div>
             @can('create_user' )  
             <div class="col text-right">
-                <a href="{{ route('user_management.create') }}" class="btn btn-circle btn-info">
+                <a href="{{ route($route .'.user_management.create') }}" class="btn btn-circle btn-info">
                     <span>{{ __('roles.create_user') }}</span>
                 </a>
             </div>
@@ -128,21 +141,21 @@
                                 <td class="text-center">
                                     @can('edit_user' )  
                                     <a class="btn btn-soft-primary btn-icon btn-circle btn-sm"
-                                        href="{{ route('user_management.view', $user->id) }}"
+                                        href="{{ route($route .'.user_management.view', $user->id) }}"
                                         title="{{ __('general.view') }}">
                                         <i class="las la-eye"></i>
                                     </a>
                                     @endcan
                                     @can('edit_user' )  
                                     <a class="btn btn-soft-secondary btn-icon btn-circle btn-sm"
-                                        href="{{ route('user_management.edit',  $user->id) }}"
+                                        href="{{ route($route .'.user_management.edit',  $user->id) }}"
                                         title="{{ __('general.edit') }}">
                                         <i class="las la-edit"></i>
                                     </a>
                                     @endcan
                                     @can('delete_user' ) 
                                     <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete"
-                                        data-href="{{ route('user_management.delete', $user->id) }}"
+                                        data-href="{{ route($route .'.user_management.delete', $user->id) }}"
                                         title="{{ __('general.delete') }}">
                                         <i class="las la-trash"></i>
                                     </a>
@@ -217,7 +230,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "{{ route('bulk-user-delete') }}",
+                url: "{{ route($route .'.bulk-user-delete') }}",
                 type: 'POST',
                 data: data,
                 cache: false,

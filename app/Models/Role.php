@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Role extends Model
 {
@@ -11,7 +12,7 @@ class Role extends Model
     use HasFactory;
 
     static $admin = 'admin';
-    static $staffs = 'staffs';
+    static $staff = 'staffs';
     static $user = 'user';
 
 
@@ -22,7 +23,7 @@ class Role extends Model
         switch ($this->name) {
             case self::$admin:
             case self::$user:
-            case self::$staffs:
+            case self::$staff:
             // case self::$organization:
             // case self::$teacher:
                 return false;
@@ -37,14 +38,14 @@ class Role extends Model
         return $this->hasMany(User::class, 'role_id', 'id');
     }
 
-    public function staffs()
+    public function staff()
     {
         return $this->hasMany(Staff::class, 'role_id', 'id');
     }
 
     public function isDefaultRole()
     {
-        return in_array($this->name, [self::$admin, self::$user , self::$staffs]);
+        return in_array($this->name, [self::$admin, self::$user , self::$staff]);
     }
     public function permissions()
     {
@@ -58,7 +59,10 @@ class Role extends Model
     {
         return $this->name == self::$admin;
     }
-
+    public function scopeActive(Builder $query)
+    {
+        return $query->where('status', 1);
+    }
 
    
 }

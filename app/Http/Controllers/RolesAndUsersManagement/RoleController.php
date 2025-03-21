@@ -7,6 +7,7 @@ use App\Models\Section;
 use App\Models\Permission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -27,7 +28,7 @@ class RoleController extends Controller
                       ->orWhere('id', $value);
                 }
             })
-            ->latest()->paginate()->appends($query_param);
+            ->active()->latest()->paginate()->appends($query_param);
 
         if(isset($search) && empty($search)) {
             $roles = Role::with('users')
@@ -47,10 +48,10 @@ class RoleController extends Controller
     public function create()
     {
         $this->authorize('create_admin_roles');
-        $roles = Role::with('users')
+        $roles = Role::with('users')->active()
             ->orderBy('created_at', 'asc')
             ->paginate(10);
-        $sections = Section::whereNull('section_group_id')
+        $sections = Section::whereNull('section_group_id')->active()
             ->with('children')
             ->get();
 
@@ -93,19 +94,28 @@ class RoleController extends Controller
     public function edit($id)
     {
         $this->authorize('edit_admin_roles');
+        if(Auth::guard('web')->check()){
 
-        $role = Role::find($id);
-        $permissions = Permission::where('role_id', '=', $role->id)->get();
-        $sections = Section::whereNull('section_group_id')
-            ->with('children')
-            ->get();
-
+          $role = Role::findOrFail($id);
+            $permissions = Permission::where('role_id', '=', $role->id)->get(); 
+            $sections = Section::whereNull('section_group_id')
+                ->with('children')
+                ->get();
+        }elseif(Auth::guard('staffs')->check()) {
+            
+                $role = Role::active()->findOrFail($id);
+                $permissions = Permission::active()->where('role_id', '=', $role->id)->get(); 
+                $sections = Section::active()->whereNull('section_group_id') 
+                    ->with('children')
+                    ->get();
+        }
+        
         $data = [
             'role' => $role,
             'sections' => $sections,
             'permissions' => $permissions->keyBy('section_id')
         ];
-
+        
         return view('admin.roles.edit', $data);
     }
 

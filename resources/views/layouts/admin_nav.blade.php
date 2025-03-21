@@ -122,8 +122,17 @@
                             <i class="las la-user-circle"></i>
                             <span>{{ __('Profile') }}</span>
                         </a>
-
-                        <a href="{{ route('logout') }}" class="dropdown-item">
+                        @php
+                            if(auth()->guard('admins')->check()){
+                                $route_logout = 'admin.logout';
+                            }else if(auth()->guard('staff')->check()){
+                                $route_logout = 'staff.logout';
+                            }
+                            else if(auth()->guard('web')->check()){
+                                $route_logout = 'manager.logout';
+                            }
+                        @endphp
+                        <a href="{{ route($route_logout) }}" class="dropdown-item">
                             <i class="las la-sign-out-alt"></i>
                             <span>{{ __('login.logout') }}</span>
                         </a>

@@ -198,6 +198,7 @@ if (! function_exists('bulk_delete')) {
         return 0;
     }
 }
+ 
 if (! function_exists('main_path')) {
     function main_path()
     {
