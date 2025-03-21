@@ -16,7 +16,7 @@
     @endif
     {{-- {{ dd(auth()->guard('staffs')->user()->hasPermission('admin_dashboard')) }} --}}
  
-    @if (auth()->user()->can('admin_dashboard'))
+    {{-- @if (auth()->user()->can('admin_dashboard')) --}}
         <div class="row gutters-10">
             <div class="col-lg-6">
                 <div class="row gutters-10">
@@ -246,7 +246,7 @@
                 </div>
             </div>
         </div>
-    @endif
+    {{-- @endif --}}
 @endsection
 @section('script')
     <script type="text/javascript">

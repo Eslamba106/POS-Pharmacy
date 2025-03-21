@@ -17,23 +17,33 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
-        $guards = empty($guards) ? [null] : $guards;
-        
+        // استخدم الحراس الممررين أو ضع الافتراضيين
+        $guards = empty($guards) ? ['web', 'admins', 'staffs'] : $guards;
+         
+        $url = url()->previous();
+        $url_array = explode('/' , $url);
+        if(in_array('admin' , $url_array)){
+           $route = 'admin';
+        }
+        else if(in_array('staff' , $url_array)){
+           $route = 'staff';
+        }
+        else{
+           $route = 'web';
+        } 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                if($request->is('admin') || $request->is('admin/*')){
-                    // redirect for backend
+                if ($route == 'admin') {
                     return redirect(RouteServiceProvider::ADMIN);
                 }
-                else{
-                    // redirect for frontend in case front
-                   // return redirect(RouteServiceProvider::HOME);
-                   return redirect(RouteServiceProvider::ADMIN);
-    
-                }      
+                if ($route == 'staff') {
+                    return redirect(RouteServiceProvider::STAFF);
+                }
+                return redirect(RouteServiceProvider::HOME); 
             }
         }
-
+    
         return $next($request);
     }
+    
 }

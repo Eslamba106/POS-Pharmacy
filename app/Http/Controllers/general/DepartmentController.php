@@ -10,8 +10,9 @@ class DepartmentController extends Controller
 {
     public function index(Request $request)
     {
-
-        $this->authorize('departments');
+        // $user = auth('staffs')->check() ? auth('staffs')->user() : auth('web')->user();
+        // dd($user->hasPermission('departments')); 
+        $this->authorize('departments' );
         $search      = $request['search'];
         $query_param = $search ? ['search' => $request['search']] : '';
 
