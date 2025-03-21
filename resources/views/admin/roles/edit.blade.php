@@ -159,5 +159,5 @@
     @endif
 @endsection
 @push('script')
-    <script src="{{ asset('public/js/roles.min.js') }}"></script>
+    <script src="{{ asset(main_path().'js/roles.min.js') }}"></script>
 @endpush

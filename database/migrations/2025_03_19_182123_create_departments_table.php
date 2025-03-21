@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('department_id')->default(0)->nullable(); 
             $table->text('description_en')->nullable();
             $table->text('description_ar')->nullable(); 
+            $table->integer('branch_id')->default(1);
             $table->timestamps();
         });
     }

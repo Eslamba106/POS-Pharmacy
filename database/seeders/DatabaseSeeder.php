@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Branch;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesTableSeeder::class);
         $this->call(SectionsTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
+        $this->call(BranchSeeder::class);
         // \App\Models\Staff::factory()->create([
         //     'name' => 'new',
         //     'email' => 'new@example.com', 
@@ -24,5 +27,13 @@ class DatabaseSeeder extends Seeder
         //     'role_id'=> 1,
         //     'role_name'=> 'admin',
         // ]);
+        \App\Models\Admin::factory()->create([
+            'name' => 'new',
+            'email' => 'new@example.com', 
+            'user_name' => 'new',
+            'password' => Hash::make('12345'),
+            'role_id'=> 1,
+            'role_name'=> 'admin',
+        ]);
     }
 }

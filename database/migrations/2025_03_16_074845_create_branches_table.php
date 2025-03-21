@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('business_settings', function (Blueprint $table) {
+        Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->longText('value');
-            $table->integer('branch_id')->default(1);
+            $table->string('name');
+            $table->string('domain')->unique();
+            $table->string('logo')->nullable();
+            $table->text('address')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('business_settings');
+        Schema::dropIfExists('branches');
     }
 };
