@@ -21,22 +21,22 @@ class RoleController extends Controller
         $search      = $request['search'];
         $query_param = $search ? ['search' => $request['search']] : '';
 
-        $roles = Role::when($request['search'], function ($q) use($request){
-                $key = explode(' ', $request['search']);
-                foreach ($key as $value) {
-                    $q->Where('name', 'like', "%{$value}%")
-                      ->orWhere('id', $value);
-                }
-            })
+        $roles = Role::when($request['search'], function ($q) use ($request) {
+            $key = explode(' ', $request['search']);
+            foreach ($key as $value) {
+                $q->Where('name', 'like', "%{$value}%")
+                    ->orWhere('id', $value);
+            }
+        })
             ->active()->latest()->paginate()->appends($query_param);
 
-        if(isset($search) && empty($search)) {
+        if (isset($search) && empty($search)) {
             $roles = Role::with('users')
-            ->orderBy('created_at', 'asc')
-            ->paginate(10);
+                ->orderBy('created_at', 'asc')
+                ->paginate(10);
         }
 
-        
+
         $data = [
             'roles' => $roles,
             'search' => $search,
@@ -68,7 +68,7 @@ class RoleController extends Controller
     {
         $this->authorize('create_admin_roles');
 
-        $request->validate(  [
+        $request->validate([
             'name' => 'required|min:3|max:64|unique:roles,name',
             'caption' => 'required|min:3|max:64|unique:roles,caption',
         ]);
@@ -88,39 +88,45 @@ class RoleController extends Controller
 
         Cache::forget('sections');
 
-        return redirect()->route('roles')->with('success' , __('general.added_successfully'));
+        return redirect()->route('roles')->with('success', __('general.added_successfully'));
     }
 
     public function edit($id)
     {
         $this->authorize('edit_admin_roles');
-        if(Auth::guard('web')->check()){
+        if (Auth::guard('web')->check()) {
 
-          $role = Role::findOrFail($id);
-            $permissions = Permission::where('role_id', '=', $role->id)->get(); 
+            $role = Role::findOrFail($id);
+            $permissions = Permission::where('role_id', '=', $role->id)->get();
             $sections = Section::whereNull('section_group_id')
                 ->with('children')
                 ->get();
-        }elseif(Auth::guard('staffs')->check()) {
-            
-                $role = Role::active()->findOrFail($id);
-                $permissions = Permission::active()->where('role_id', '=', $role->id)->get(); 
-                $sections = Section::active()->whereNull('section_group_id') 
-                    ->with('children')
-                    ->get();
+        } elseif (Auth::guard('staffs')->check()) {
+
+            $role = Role::active()->findOrFail($id);
+            $permissions = Permission::active()->where('role_id', '=', $role->id)->get();
+            $sections = Section::active()->whereNull('section_group_id')
+                ->with('children')
+                ->get();
+        }else{
+            $role = Role::findOrFail($id);
+            $permissions = Permission::where('role_id', '=', $role->id)->get();
+            $sections = Section::whereNull('section_group_id')
+                ->with('children')
+                ->get();
         }
-        
+
         $data = [
             'role' => $role,
             'sections' => $sections,
             'permissions' => $permissions->keyBy('section_id')
         ];
-        
+
         return view('admin.roles.edit', $data);
     }
 
     public function update(Request $request, $id)
-    {
+    { 
         $this->authorize('update_admin_roles');
 
         $role = Role::find($id);
@@ -140,7 +146,7 @@ class RoleController extends Controller
 
         Cache::forget('sections');
 
-        return redirect()->route('roles')->with('success' , __('general.updated_successfully'));
+        return redirect()->back()->with('success', __('general.updated_successfully'));
     }
 
     public function destroy(Request $request)
@@ -152,7 +158,7 @@ class RoleController extends Controller
             $role->delete();
         }
 
-        return redirect()->route('roles')->with('success' , "Deleted Successfully");
+        return redirect()->route('roles')->with('success', "Deleted Successfully");
     }
 
     public function storePermission($role, $sections)
@@ -169,8 +175,9 @@ class RoleController extends Controller
         Permission::insert($permissions);
     }
 
-    public function bulk_role_delete(Request $request){
-        $items = bulk_delete($request ,'App\Models\Role' );
+    public function bulk_role_delete(Request $request)
+    {
+        $items = bulk_delete($request, 'App\Models\Role');
         return $items;
     }
 }

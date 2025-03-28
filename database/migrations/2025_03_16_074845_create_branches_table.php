@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('domain')->unique();
             $table->string('logo')->nullable();
             $table->text('address')->nullable();
+            $table->json('database_options')->nullable();
+            $table->string('company_id')->default(1);
             $table->timestamps();
         });
     }

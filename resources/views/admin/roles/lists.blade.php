@@ -1,5 +1,8 @@
 @extends('layouts.main')
-
+{{-- @php
+    $main_route = 'admin';
+    // $main_route = app()->make('main_route');
+@endphp --}}
 
 @section('title')
     {{ __('roles.roles') }}
@@ -23,7 +26,7 @@
             </div>
             @can('create_admin_roles')
                 <div class="col text-right">
-                    <a href="{{ route('roles.create') }}" class="btn btn-circle btn-info">
+                    <a href="{{ route($main_route.'.roles.create') }}" class="btn btn-circle btn-info">
                         <span>{{ __('roles.create_role') }}</span>
                     </a>
                 </div>
@@ -123,14 +126,14 @@
                                         <div class="d-flex justify-content-center gap-2">
                                             @can('edit_admin_roles')
                                                 <a class="btn btn-soft-secondary btn-icon btn-circle btn-sm"
-                                                    href="{{ route('roles.edit', $role->id) }}" title="{{ __('general.edit') }}">
+                                                    href="{{ route($main_route.'.roles.edit', $role->id) }}" title="{{ __('general.edit') }}">
                                                     <i class="las la-edit"></i>
                                                 </a>
                                             @endcan
                                             @can('delete_admin_roles')
                                                 <a href="#"
                                                     class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete"
-                                                    data-href="{{ route('roles.delete', $role->id) }}"
+                                                    data-href="{{ route($main_route.'.roles.delete', $role->id) }}"
                                                     title="{{ __('general.delete') }}">
                                                     <i class="las la-trash"></i>
                                                 </a>
@@ -202,7 +205,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "{{ route('bulk-role-delete') }}",
+                url: "{{ route($main_route.'.bulk-role-delete') }}",
                 type: 'POST',
                 data: data,
                 cache: false,

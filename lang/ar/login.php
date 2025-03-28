@@ -9,5 +9,10 @@ return [
     'user_not_found'                                        => 'المستخدم غير موجود',
     'logout'                                                => 'تسجيل الخروج', 
     'password'                                              => 'كلمة المرور',
+    'company_id'                                            => 'معرّف الشركة',
+    'domain'                                                => 'النطاق',
+    'enter_your_domain'                                     => 'أدخل نطاقك',
+    'company'                                               => 'الشركة',
+    'admin'                                                 => 'المسؤول',
 
 ];

@@ -20,7 +20,7 @@ class AuthAdminController extends Controller
         }
 
         if (auth()->guard('admins')->check()) {
-           
+             
             return redirect()->route('admin.dashboard');
         } else { 
             return redirect()->back()->with('error', __('login.user_not_found'));

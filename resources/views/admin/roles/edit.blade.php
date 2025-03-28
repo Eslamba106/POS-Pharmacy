@@ -26,7 +26,7 @@
             <div class="col-md-12">
                 <div class="card mb-3">
                     <div class="card-body" style="text-align: {{ Session::get('locale') === 'ar' ? 'right' : 'left' }};">
-                        <form action="{{ route('roles.update', $role->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route($main_route.'.roles.update', $role->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @if ($errors->any())
                                 <div class="alert alert-danger">

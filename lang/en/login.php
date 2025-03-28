@@ -10,4 +10,8 @@ return [
     'user_not_found'                                        => 'User Not Found',
     'logout'                                                => 'Logout',
     'password'                                              => 'Password',
+    'company_id'                                                            => 'Company ID',
+    'domain'                                                                => 'Domain',
+    'enter_your_domain'                                                     => 'Enter Your Domain',
+
 ];

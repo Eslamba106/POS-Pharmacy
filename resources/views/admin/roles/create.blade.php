@@ -30,7 +30,7 @@
             <div class="col-md-12">
                 <div class="card mb-3">
                     <div class="card-body" style="text-align: {{ Session::get('locale') === 'ar' ? 'right' : 'left' }};">
-                        <form action="{{ route('roles.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route($main_route.'.roles.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
 

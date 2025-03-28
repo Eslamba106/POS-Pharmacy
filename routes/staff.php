@@ -13,11 +13,11 @@ Route::get('/staff/auth', function () {
         'route' => 'staff'
     ];
     return view('auth.welcome' , $data);
-})->middleware('guest')->name('staff.login-page');
+})->middleware('guest')->name('login-page');
 
 Route::group(["prefix" => "staff/auth"], function () {
-    Route::post("login", [AuthStaffController::class, "login"])->name("staff.login")->middleware('guest');
-    Route::get("logout", [AuthStaffController::class, "logout"])->name("staff.logout")->middleware('auth');
+    Route::post("login", [AuthStaffController::class, "login"])->name("login")->middleware('guest');
+    Route::get("logout", [AuthStaffController::class, "logout"])->name("logout")->middleware('auth');
 });
 
 Route::group(['middleware' => 'auth:staffs', 'prefix' => 'staff'], function () {

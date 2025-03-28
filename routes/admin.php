@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\general\CategoryController;
-use App\Http\Controllers\general\DepartmentController;
+use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\system\BranchController; 
 use App\Http\Controllers\usermanagement\AuthAdminController;
 use App\Http\Controllers\RolesAndUsersManagement\RoleController;
 use App\Http\Controllers\RolesAndUsersManagement\UserManagementController;
@@ -13,7 +13,7 @@ Route::get('auth/admin', function () {
         'route' => 'admin'
     ];
     return view('auth.welcome' , $data);
-})->middleware('guest:web,admins,staffs')->name('admin.login-page');
+})->middleware('guest:web,admins')->name('admin.login-page');
 
 Route::group(["prefix" => "auth/admin"], function () {
     Route::post("login", [AuthAdminController::class, "login"])->name("admin.login")->middleware('guest');
@@ -52,27 +52,29 @@ Route::group(['middleware' => 'auth:admins', 'prefix' => 'admin'], function () {
         Route::post('/bulk-role-delete', [RoleController::class, 'bulk_role_delete'])->name('admin.bulk-role-delete');
     });
 
-    // Categories
-    Route::group(['prefix' => 'categories'], function () {
-        Route::get('/', [CategoryController::class, 'index'])->name('admin.categories');
-        Route::get('/create', [CategoryController::class, 'create'])->name('admin.categories.create');
-        Route::post('/store', [CategoryController::class, 'store'])->name('admin.categories.store');
-        Route::get('/view/{id}', [CategoryController::class, 'view'])->name('admin.categories.view'); 
-        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('admin.categories.edit');
-        Route::post('/{id}/update', [CategoryController::class, 'update'])->name('admin.categories.update');
-        Route::get('/delete', [CategoryController::class, 'destroy'])->name('admin.categories.delete');
-        Route::post('/bulk-role-delete', [CategoryController::class, 'bulk_category_delete'])->name('admin.bulk-category-delete');
+    // Company 
+    Route::group(['prefix' => 'companies'], function () {
+        Route::get('/', [CompanyController::class, 'index'])->name('admin.companies');
+        Route::get('/create', [CompanyController::class, 'create'])->name('admin.companies.create');
+        Route::post('/store', [CompanyController::class, 'store'])->name('admin.companies.store');
+        Route::get('/view/{id}', [CompanyController::class, 'view'])->name('admin.companies.view'); 
+        Route::get('/edit/{id}', [CompanyController::class, 'edit'])->name('admin.companies.edit');
+        Route::post('/{id}/update', [CompanyController::class, 'update'])->name('admin.companies.update');
+        Route::get('/delete', [CompanyController::class, 'destroy'])->name('admin.companies.delete');
+        Route::post('/bulk-role-delete', [CompanyController::class, 'bulk_companies_delete'])->name('admin.bulk-companies-delete');
     });
 
-    // Departments
-    Route::group(['prefix' => 'departments'], function () {
-        Route::get('/', [DepartmentController::class, 'index'])->name('admin.departments');
-        Route::get('/create', [DepartmentController::class, 'create'])->name('admin.departments.create');
-        Route::post('/store', [DepartmentController::class, 'store'])->name('admin.departments.store');
-        Route::get('/view/{id}', [DepartmentController::class, 'view'])->name('admin.departments.view'); 
-        Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('admin.departments.edit');
-        Route::post('/{id}/update', [DepartmentController::class, 'update'])->name('admin.departments.update');
-        Route::get('/delete', [DepartmentController::class, 'destroy'])->name('admin.departments.delete');
-        Route::post('/bulk-role-delete', [DepartmentController::class, 'bulk_department_delete'])->name('admin.bulk-department-delete');
+ 
+
+    // Branches
+    Route::group(['prefix' => 'branches'], function () {
+        Route::get('/', [BranchController::class, 'index'])->name('admin.branches');
+        Route::get('/create', [BranchController::class, 'create'])->name('admin.branches.create');
+        Route::post('/store', [BranchController::class, 'store'])->name('admin.branches.store');
+        Route::get('/view/{id}', [BranchController::class, 'view'])->name('admin.branches.view'); 
+        Route::get('/edit/{id}', [BranchController::class, 'edit'])->name('admin.branches.edit');
+        Route::post('/{id}/update', [BranchController::class, 'update'])->name('admin.branches.update');
+        Route::get('/delete', [BranchController::class, 'destroy'])->name('admin.branches.delete');
+        Route::post('/bulk-role-delete', [BranchController::class, 'bulk_department_delete'])->name('admin.bulk-branch-delete');
     });
 });
