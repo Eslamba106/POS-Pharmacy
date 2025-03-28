@@ -27,4 +27,7 @@ return [
     'deleted_successfully'                                                  => 'Deleted Successfully',  
     'added_successfully'                                                    => 'Created Successfully',
     'type_enter'                                                            => 'Type & Enter',
+    'company'                                                               => 'Company',
+    'admin'                                                                 => 'Admin',
+    
 ];

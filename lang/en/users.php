@@ -6,5 +6,5 @@ return [
     'email'                                         => 'Email',
     'new_password'                                  => 'New Password',
     'profile'                                       => 'Profile',
-    
+    'phone'                                         => 'Phone',
 ];

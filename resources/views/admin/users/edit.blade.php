@@ -33,7 +33,7 @@
         <!-- End Page Title -->
 
         <!-- Form -->
-        <form class="product-form text-start" action="{{ route('user_management.update' , $user->id) }}" method="POST" enctype="multipart/form-data" >
+        <form class="product-form text-start" action="{{ route($main_route .'.user_management.update' , $user->id) }}" method="POST" enctype="multipart/form-data" >
             @csrf
             @method('patch')
 

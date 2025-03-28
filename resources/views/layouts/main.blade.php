@@ -1,9 +1,9 @@
 <!doctype html>
 
-<html @if (session()->get('locale') == 'ar') dir="rtl" lang="ar"  
+<html @if (session()->get('locale') == 'en') dir="ltr" lang="en"
     
-@else
-dir="ltr" lang="en" @endif>
+@else dir="rtl" lang="ar"  
+ @endif>
 
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">

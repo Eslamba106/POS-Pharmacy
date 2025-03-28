@@ -23,16 +23,18 @@ Route::get('language/{locale}', function ($locale) {
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware('guest:web,admins,staffs')->name('login-page-main');
+})
+// ->middleware('guest:web,admins,staffs')
+->name('login-page-main');
 
 Route::get('/auth', function () {
     $data = [
         'route' => 'manager'
     ];
     return view('auth.welcome' , $data);
-})->middleware('guest:web,admins,staffs')->name('login-page');
+})->middleware('guest:web,admins')->name('login-page');
 
 Route::group(["prefix" => "auth"], function () {
-    Route::post("login", [AuthController::class, "login"])->name("manager.login")->middleware('guest');
-    Route::get("logout", [AuthController::class, "logout"])->name("manager.logout")->middleware('auth');
+    Route::post("login", [AuthController::class, "login"])->name("login")->middleware('guest');
+    Route::get("logout", [AuthController::class, "logout"])->name("logout")->middleware('auth');
 });

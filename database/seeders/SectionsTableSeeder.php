@@ -48,6 +48,21 @@ class SectionsTableSeeder extends Seeder
         Section::updateOrCreate(['id' => 24], ['name' => 'edit_department', 'section_group_id' => 21, 'caption' => 'edit_department']);
         Section::updateOrCreate(['id' => 25], ['name' => 'create_department', 'section_group_id' => 21, 'caption' => 'create_department']);
  
+        // Branches Management 26 - 30
+        Section::updateOrCreate(['id' => 26], ['name' => 'branches', 'caption' => 'branches']);
+        Section::updateOrCreate(['id' => 27], ['name' => 'all_branches', 'section_group_id' => 26, 'caption' => 'show_all_branches']); 
+        Section::updateOrCreate(['id' => 28], ['name' => 'delete_branch', 'section_group_id' => 26, 'caption' => 'delete_branch']);
+        Section::updateOrCreate(['id' => 29], ['name' => 'edit_branch', 'section_group_id' => 26, 'caption' => 'edit_branch']);
+        Section::updateOrCreate(['id' => 30], ['name' => 'create_branch', 'section_group_id' => 26, 'caption' => 'create_branch']);
+ 
+ 
+        // Company Management 31 - 3
+        Section::updateOrCreate(['id' => 31], ['name' => 'companies', 'caption' => 'companies']);
+        Section::updateOrCreate(['id' => 32], ['name' => 'all_companies', 'section_group_id' => 31, 'caption' => 'show_all_companies']); 
+        Section::updateOrCreate(['id' => 33], ['name' => 'delete_company', 'section_group_id' => 31, 'caption' => 'delete_company']);
+        Section::updateOrCreate(['id' => 34], ['name' => 'edit_company', 'section_group_id' => 31, 'caption' => 'edit_company']);
+        Section::updateOrCreate(['id' => 35], ['name' => 'create_company', 'section_group_id' => 31, 'caption' => 'create_company']);
+ 
         /* Run Panel Sections */
         $this->runPanelSections();
     }

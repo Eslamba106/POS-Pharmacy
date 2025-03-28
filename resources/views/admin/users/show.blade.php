@@ -9,7 +9,7 @@
                 <h5 class="mb-0 h6">{{__('users.profile')}}</h5>
             </div>
             <div class="card-body">
-                <form class="form-horizontal" action="{{ route('user_management.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                <form class="form-horizontal" action="{{ route($main_route .'.user_management.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                     <input name="_method" type="hidden" value="PATCH">
                 	@csrf
                     <div class="form-group row">

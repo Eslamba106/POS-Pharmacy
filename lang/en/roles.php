@@ -55,6 +55,13 @@ return [
     'edit_department'                                               => 'Edit Department',
     'delete_department'                                             => 'Delete Department',
 
+    'show_all_companies'                                            => 'Show All Companies',
+    'companies'                                                     => 'Companies',
+    'all_companies'                                                 => 'Companies List',
+    'create_company'                                                => 'Create Company',
+    'edit_company'                                                  => 'Edit Company',
+    'delete_company'                                                => 'Delete Company',
+
 
     
 ];

@@ -53,5 +53,12 @@ return [
     'edit_department'                                               => 'تعديل القسم',
     'delete_department'                                             => 'حذف القسم',
 
+    'show_all_companies'                                            => 'عرض كل الشركات',
+    'companies'                                                     => 'الشركات',
+    'all_companies'                                                 => 'قائمة الشركات',
+    'create_company'                                                => 'إنشاء شركة',
+    'edit_company'                                                  => 'تعديل الشركة',
+    'delete_company'                                                => 'حذف الشركة',
+
 
 ];

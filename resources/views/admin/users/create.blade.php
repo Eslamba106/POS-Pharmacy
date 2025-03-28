@@ -24,7 +24,7 @@
                     <h5 class="mb-0 h6">{{ __('Staff Information') }}</h5>
                 </div>
 
-                <form class="form-horizontal" action="{{ route('user_management.store') }}" method="POST"
+                <form class="form-horizontal" action="{{ route($main_route .'.user_management.store') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
